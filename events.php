@@ -1,0 +1,4 @@
+<?php
+require_once 'config.php'; require_login();
+$items=$pdo->query("SELECT * FROM events ORDER BY event_date ASC,event_time ASC")->fetchAll();
+?><!doctype html><html lang="id"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Kegiatan</title><link rel="stylesheet" href="assets/style.css"></head><body><?php include 'partials/nav.php'; ?><main class="container"><div class="page-title"><span class="eyebrow">AGENDA</span><h2>Kalender Kegiatan</h2></div><div class="grid"><?php foreach($items as $ev): ?><section class="card event"><div class="datebox"><strong><?= e(date('d',strtotime($ev['event_date']))) ?></strong><span><?= e(date('M',strtotime($ev['event_date']))) ?></span></div><div><h3><?= e($ev['title']) ?></h3><p>⏰ <?= e($ev['event_time'] ?: '-') ?> &nbsp; 📍 <?= e($ev['location'] ?: '-') ?></p><p><?= e($ev['description']) ?></p></div></section><?php endforeach; ?></div></main></body></html>

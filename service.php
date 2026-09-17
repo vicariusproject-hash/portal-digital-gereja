@@ -1,0 +1,4 @@
+<?php
+require_once 'config.php'; require_login();
+$items=$pdo->query("SELECT * FROM service_schedules ORDER BY service_date ASC")->fetchAll();
+?><!doctype html><html lang="id"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Jadwal Pelayanan</title><link rel="stylesheet" href="assets/style.css"></head><body><?php include 'partials/nav.php'; ?><main class="container"><div class="page-title"><span class="eyebrow">PELAYANAN</span><h2>Jadwal Pelayanan</h2></div><section class="card table-wrap"><table><thead><tr><th>Tanggal</th><th>Pelayanan</th><th>Nama</th></tr></thead><tbody><?php foreach($items as $s): ?><tr><td><?= e(date('d/m/Y',strtotime($s['service_date']))) ?></td><td><?= e($s['service_type']) ?></td><td><?= e($s['member_name']) ?></td></tr><?php endforeach; ?></tbody></table></section></main></body></html>
